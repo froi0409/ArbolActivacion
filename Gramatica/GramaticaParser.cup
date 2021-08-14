@@ -1,6 +1,7 @@
-package com.froi.arbolactivacion.gramaticas;
+package com.froi.arbolactivador.gramaticas;
 
 import java_cup.runtime.*;
+import javax.swing.JOptionPane;
 
 class GramaticaParser;
 
@@ -11,12 +12,15 @@ parser code {:
     }
     public void report_error(String message, Object info) {
         System.out.println("reporterror");
+        JOptionPane.showMessageDialog(null, "Gramática erronea");
     }
     public void report_fatal_error(String message, Object info) {
         System.out.println("reportfatal");
+        JOptionPane.showMessageDialog(null, "Gramática erronea");
     }
     public void syntax_error(Symbol cur_token) {
         System.out.println("syntaxerr " + symbl_name_from_id(cur_token.sym) + " " + cur_token.left + " - " + cur_token.right);
+        JOptionPane.showMessageDialog(null, "Gramática erronea");
     }
     protected int error_sync_size() {
         return 1;
@@ -33,7 +37,7 @@ non terminal inicio, instrucciones, procesos, parametro, proceso_begin, proceso_
 
 start with inicio;
 
-inicio ::=  PROGRAMA ALFANUMERICO instrucciones
+inicio ::=  PROGRAMA ALFANUMERICO instrucciones         {:JOptionPane.showMessageDialog(null, "Gramática analizada con éxito");:}
             ;
 
 instrucciones ::=   procesos proceso_begin
